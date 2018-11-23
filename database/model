@@ -1,0 +1,33 @@
+orders
+    id
+    product_id
+    supplier_id
+    Price/Unite
+    Quantity
+    Delovery Date
+product
+    name
+    categiory
+    Brand
+    Price/Unite
+    Quantity
+    pro Date
+    Exp Date
+supplier 
+    name
+    Bank Account
+    website
+    email
+    address
+    phone
+invoice
+    id
+    name
+    Price/Unite
+    Quantity
+    date
+    tax
+    total
+=============
+app
+list orders

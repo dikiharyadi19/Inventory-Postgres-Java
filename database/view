@@ -1,0 +1,22 @@
+ int row =tableSupplier.getSelectedRow();
+            String tableClick=(tableSupplier.getModel().getValueAt(row,0).toString());
+            
+            String sql="select * from tb_supplier where name='"+tableClick+"'";
+            ps=connection.prepareStatement(sql);
+            rset=ps.executeQuery();
+            
+            if(rset.next()){
+                String add1=rset.getString("name");
+                fieldName.setText(add1);
+                
+                String add2=rset.getString("company_name");
+                fieldCompanyName.setText(add2);
+                
+                String add3=rset.getString("email");
+                fieldEmail.setText(add3);
+                
+                String add4=rset.getString("phone");
+                fieldPhone.setText(add4);
+                
+                String add5=rset.getString("description");
+                areaDescription.setText(add5);
