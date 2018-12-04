@@ -33,10 +33,7 @@ public class TabReport extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        comboStockIn = new javax.swing.JComboBox();
-        comboStockOut = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -70,13 +67,7 @@ public class TabReport extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboStockIn.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        comboStockOut.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel1.setText("jLabel1");
-
-        jLabel2.setText("jLabel2");
+        jLabel1.setText("Day");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,25 +75,15 @@ public class TabReport extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(comboStockIn, 0, 281, Short.MAX_VALUE)
-                    .addComponent(comboStockOut, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboStockIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboStockOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
 
         jLabel3.setText("Berapa total modal, berapa keuntungan perhari,perbulan,berapa ");
@@ -121,7 +102,7 @@ public class TabReport extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(266, 266, 266)
                         .addComponent(jLabel3)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,32 +124,18 @@ public class TabReport extends javax.swing.JPanel {
         char[] ch = new char[1];
         int i;
         
-        comboStockIn.removeAllItems();
+        //comboStockIn.removeAllItems();
         for (i=1; i<=14; i++){
-        comboStockIn.addItem(Integer.toString(i));
+        //comboStockIn.addItem(Integer.toString(i));
         
         }
         
-        comboStockOut.removeAllItems();
+        //comboStockOut.removeAllItems();
         for(i=0; i<26; i++){
            ch[0] = (char) (65+i);
-         comboStockOut.addItem(new String(ch));
+         //comboStockOut.addItem(new String(ch));
         }
     }
-    
-    public String getStockIn(){
-        return comboStockIn.getSelectedItem().toString();
-    }
-    public void setStockIn(String product){
-       comboStockIn.setSelectedItem(product);
-    }
-    public String getStockOut(){
-        return comboStockOut.getSelectedItem().toString();
-    }
-    public void setStockOut(String product){
-       comboStockOut.setSelectedItem(product);
-    }
-    
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -177,11 +144,8 @@ public class TabReport extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox comboStockIn;
-    private javax.swing.JComboBox comboStockOut;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -15,11 +15,11 @@ import java.sql.SQLException;
  * @author Dikki Haryadi
  */
 public class Koneksi {
-    private final String url="jdbc:postgresql://localhost/inventory";
+    private final String url="jdbc:postgresql://localhost/postgres";
     private final String user="postgres";
     private final String password="1111";
 
-
+    
 
     
     public Connection getConnection()
@@ -35,5 +35,11 @@ public class Koneksi {
         
         
         return conn;
+    }
+    
+    
+    public static void main(String[] args){
+        Koneksi koneksi=new Koneksi();
+        koneksi.getConnection();
     }
 }
