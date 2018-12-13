@@ -23,7 +23,7 @@ public class TabUser extends javax.swing.JPanel {
     public TabUser() {
         initComponents();
         userController.UpdateTable(tableUser);
-        userController.setId(fieldId, tableUser);
+      
         fieldName.requestFocus();
     }
 
@@ -58,8 +58,7 @@ public class TabUser extends javax.swing.JPanel {
         fieldName = new javax.swing.JTextField();
         fieldSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        dateDate = new com.toedter.calendar.JDateChooser();
-        fieldId = new javax.swing.JTextField();
+        dataDate = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(187, 187, 187));
 
@@ -183,7 +182,7 @@ public class TabUser extends javax.swing.JPanel {
             }
         });
 
-        dateDate.setDateFormatString("dd-MM-yyyy");
+        dataDate.setDateFormatString("dd-MM-yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,31 +192,24 @@ public class TabUser extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(fieldSearch))
+                        .addComponent(fieldSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch))
+                    .addComponent(fieldName)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldName)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel3))
-                                .addGap(0, 262, Short.MAX_VALUE))
-                            .addComponent(dateDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fieldEmail)
-                            .addComponent(fieldPassword)
-                            .addComponent(jScrollPane2)
-                            .addComponent(comboRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel3))
+                        .addGap(0, 262, Short.MAX_VALUE))
+                    .addComponent(dataDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fieldEmail)
+                    .addComponent(fieldPassword)
+                    .addComponent(jScrollPane2)
+                    .addComponent(comboRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
         jPanel2Layout.setVerticalGroup(
@@ -227,16 +219,14 @@ public class TabUser extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(5, 5, 5)
                 .addComponent(fieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dataDate, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -284,22 +274,22 @@ public class TabUser extends javax.swing.JPanel {
   
     
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        userController.Clear(fieldSearch, fieldName, fieldId, dateDate, fieldEmail, fieldPassword, areaAddress, comboRole);
+        userController.Clear(fieldSearch, fieldName,dataDate, fieldEmail, fieldPassword, areaAddress, comboRole);
         userController.UpdateTable(tableUser);
-        userController.setId(fieldId, tableUser);
+       
      
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void tableUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableUserKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_DOWN || evt.getKeyCode()==KeyEvent.VK_UP )
         {
-        userController.setClick(tableUser, fieldSearch, fieldName, fieldId, dateDate, fieldEmail, fieldPassword, areaAddress, comboRole);
+        userController.setClick(tableUser, fieldSearch, fieldName, dataDate, fieldEmail, fieldPassword, areaAddress, comboRole);
         }
     }//GEN-LAST:event_tableUserKeyPressed
 
     private void tableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUserMouseClicked
         try{
-            userController.setClick(tableUser, fieldSearch, fieldName, fieldId, dateDate, fieldEmail, fieldPassword, areaAddress, comboRole);
+            userController.setClick(tableUser, fieldSearch, fieldName,  dataDate, fieldEmail, fieldPassword, areaAddress, comboRole);
         }catch(Exception ex)
         {
             ex.printStackTrace();
@@ -309,10 +299,9 @@ public class TabUser extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          try{
             
-            userController.save(dateDate, fieldName, fieldId, fieldId, fieldEmail, fieldId, areaAddress, comboRole);
+            userController.save(dataDate, fieldName, fieldEmail, fieldPassword, areaAddress, comboRole);
             userController.UpdateTable(tableUser);
-            userController.save(dateDate, fieldName, fieldId, fieldId, fieldEmail, fieldId, areaAddress, comboRole);
-            userController.setId(fieldId, tableUser);
+            
             fieldName.requestFocus();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error Saving Data");
@@ -322,10 +311,9 @@ public class TabUser extends javax.swing.JPanel {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         
         try{
-          userController.update(dateDate, fieldName, fieldId, fieldId, fieldEmail, fieldPassword, areaAddress, comboRole);
-          userController.Clear(fieldSearch, fieldName, fieldId, dateDate, fieldEmail, fieldPassword, areaAddress, comboRole);
+          userController.update(dataDate, fieldName, fieldEmail, fieldPassword, areaAddress, comboRole);
+          userController.Clear(fieldSearch, fieldName, dataDate, fieldEmail, fieldPassword, areaAddress, comboRole);
           userController.UpdateTable(tableUser);
-          userController.setId(fieldId, tableUser);
           fieldName.requestFocus();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error"+ex);
@@ -341,24 +329,24 @@ public class TabUser extends javax.swing.JPanel {
         userController.delete(fieldName);
         userController.UpdateTable(tableUser);
         //userController.Clear(fieldSearch, fieldName, fieldId, dateDate, fieldEmail, fieldPassword, areaAddress, comboRole);
-        userController.setId(fieldId, tableUser);
-        fieldName.requestFocus();
+            fieldName.requestFocus();
        }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                    userController.Search(fieldSearch, fieldName, fieldId, dateDate, fieldEmail, fieldPassword, areaAddress, comboRole);
+                    userController.Search(fieldSearch, fieldName, dataDate, fieldEmail, fieldPassword, areaAddress, comboRole);
+       
         }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
-            userController.Clear(fieldSearch, fieldName, fieldId, dateDate, fieldEmail, fieldPassword, areaAddress, comboRole);
-            userController.setId(fieldId, tableUser);
+            userController.Clear(fieldSearch, fieldName,  dataDate, fieldEmail, fieldPassword, areaAddress, comboRole);
+        
         }
 
     }//GEN-LAST:event_fieldSearchKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        userController.Clear(fieldSearch, fieldName, fieldId, dateDate, fieldEmail, fieldPassword, areaAddress, comboRole);
+        userController.Clear(fieldSearch, fieldName, dataDate, fieldEmail, fieldPassword, areaAddress, comboRole);
     }//GEN-LAST:event_btnSearchActionPerformed
 
 
@@ -370,9 +358,8 @@ public class TabUser extends javax.swing.JPanel {
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox comboRole;
-    private com.toedter.calendar.JDateChooser dateDate;
+    private com.toedter.calendar.JDateChooser dataDate;
     private javax.swing.JTextField fieldEmail;
-    private javax.swing.JTextField fieldId;
     private javax.swing.JTextField fieldName;
     private javax.swing.JPasswordField fieldPassword;
     private javax.swing.JTextField fieldSearch;

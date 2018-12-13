@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,12 +19,13 @@ import view.ErrorMessage;
  */
 public class Users {
     private int id;
-    private String name,dob,email,password,address,role;
+    private String name,email,password,address,role;
+    private Date dob;
     private String message;
     private Object[][] list;
     private final Koneksi koneksi= new Koneksi();
     private final ErrorMessage messageDialog=new ErrorMessage();
-
+//##############################################################################
     public int getId() {
         return id;
     }
@@ -42,11 +44,11 @@ public class Users {
         this.name=name;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
     
@@ -101,7 +103,7 @@ public class Users {
     {
         this.list=list;
     }
-    
+//##############################################################################   
        //fungsi untuk menyimpan data
      public boolean update()
     {
@@ -122,7 +124,7 @@ public class Users {
                         ps =connection.prepareStatement(sqlQuery);
                        
                         ps.setString(1, name);
-                        ps.setString(2, dob);
+                        ps.setDate(2, dob);
                         ps.setString(3, email);
                         ps.setString(4, password);
                         ps.setString(5, address);
@@ -157,7 +159,7 @@ public class Users {
         
         return !errorMessage;
     }
-    
+//##############################################################################
     public boolean save()
     {
         boolean errorMessage=false;
@@ -176,18 +178,18 @@ public class Users {
             try {
               
                     save=true;
-                    sqlQuery="insert into tb_user(id,name,dob,email,password,address,role) values(?,?,?,?,?,?,?)";
+                    sqlQuery="insert into tb_user(name,dob,email,password,address,role) values(?,?,?,?,?,?)";
                     
                     
                     ps=connection.prepareStatement(sqlQuery);
                     
-                    ps.setInt(1, id);
-                    ps.setString(2, name);
-                    ps.setString(3, dob);
-                    ps.setString(4, email);
-                    ps.setString(5, password);
-                    ps.setString(6, address);
-                    ps.setString(7, role);
+                   
+                    ps.setString(1, name);
+                    ps.setDate(2, dob);
+                    ps.setString(3, email);
+                    ps.setString(4, password);
+                    ps.setString(5, address);
+                    ps.setString(6, role);
                     totalSave=ps.executeUpdate();
                 if(save)
                 {
@@ -206,6 +208,7 @@ public class Users {
         
         return !errorMessage;
     }
+//##############################################################################
      public boolean delete(String name)
     {
         boolean errorMessage=false;
@@ -244,14 +247,14 @@ public class Users {
         return !errorMessage;
     }
      
-     
+//##############################################################################
     public boolean Search(String Name)
     {
         boolean errorMessage=false;
         Connection connection;
         this.id=0;
         this.name="";
-        this.dob="";
+        this.dob=null;
         this.email="";
         this.password="";
         this.role="";
@@ -274,7 +277,7 @@ public class Users {
                 {
                     this.id=rset.getInt("id");
                     this.name=rset.getString("name");
-                    this.dob=rset.getString("dob");
+                    this.dob=rset.getDate("dob");
                     this.email=rset.getString("email");
                     this.password=rset.getString("password");
                     this.role=rset.getString("role");
@@ -306,7 +309,7 @@ public class Users {
         return !errorMessage;
     }
     
-    
+//##############################################################################
      public boolean UpdateTable(javax.swing.JTable tableUser){
        boolean errorMessage=false;
        Connection connection=null;
@@ -324,6 +327,6 @@ public class Users {
        return !errorMessage;
     }
    
-    
+//##############################################################################    
    
 }

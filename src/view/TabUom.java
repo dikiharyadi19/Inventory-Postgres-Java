@@ -23,7 +23,7 @@ public class TabUom extends javax.swing.JPanel {
     public TabUom() {
         initComponents();
         uomController.UpdateTable(tableUom);
-        uomController.setId(fieldId, tableUom);
+        
         fieldName.requestFocus();
     }
 
@@ -48,7 +48,6 @@ public class TabUom extends javax.swing.JPanel {
         fieldAbbreviation = new javax.swing.JTextField();
         fieldSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        fieldId = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -174,7 +173,6 @@ public class TabUom extends javax.swing.JPanel {
                         .addComponent(btnSearch))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
@@ -196,9 +194,7 @@ public class TabUom extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(fieldSearch)))
-                        .addGap(18, 18, 18)
-                        .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(49, 49, 49)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,8 +235,8 @@ public class TabUom extends javax.swing.JPanel {
     
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         uomController.UpdateTable(tableUom);
-        uomController.clear(fieldId, fieldSearch, fieldName, fieldAbbreviation, areaDescription);
-        uomController.setId(fieldId, tableUom);
+        uomController.clear( fieldSearch, fieldName, fieldAbbreviation, areaDescription);
+    
         fieldName.requestFocus();
         
     }//GEN-LAST:event_btnClearActionPerformed
@@ -249,7 +245,7 @@ public class TabUom extends javax.swing.JPanel {
          if(evt.getKeyCode()==KeyEvent.VK_DOWN || evt.getKeyCode()==KeyEvent.VK_UP )
         {
          try{
-             uomController.setClick(tableUom, fieldSearch, fieldId, fieldName, fieldAbbreviation, areaDescription);
+             uomController.setClick(tableUom, fieldSearch, fieldName, fieldAbbreviation, areaDescription);
             
             
         }catch(Exception ex)
@@ -261,7 +257,7 @@ public class TabUom extends javax.swing.JPanel {
 
     private void tableUomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUomMouseClicked
        try{
-            uomController.setClick(tableUom, fieldSearch, fieldId, fieldName, fieldAbbreviation, areaDescription);
+            uomController.setClick(tableUom, fieldSearch, fieldName, fieldAbbreviation, areaDescription);
                        
         }catch(Exception ex)
         {
@@ -272,10 +268,10 @@ public class TabUom extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
        try{
             
-           uomController.save(fieldId, fieldName, fieldAbbreviation, areaDescription);
+           uomController.save( fieldName, fieldAbbreviation, areaDescription);
            uomController.UpdateTable(tableUom);
-           uomController.clear(fieldId, fieldSearch, fieldName, fieldAbbreviation, areaDescription);
-           uomController.setId(fieldId, tableUom); 
+           uomController.clear( fieldSearch, fieldName, fieldAbbreviation, areaDescription);
+         
            fieldName.requestFocus();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error Saving Data");
@@ -284,10 +280,10 @@ public class TabUom extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try{
-            uomController.update(fieldId, fieldName, fieldAbbreviation, areaDescription);
-            uomController.clear(fieldId, fieldSearch, fieldName, fieldAbbreviation, areaDescription);
+            uomController.update( fieldName, fieldAbbreviation, areaDescription);
+            uomController.clear( fieldSearch, fieldName, fieldAbbreviation, areaDescription);
             uomController.UpdateTable(tableUom);
-            uomController.setId(fieldId, tableUom);
+      
             fieldName.requestFocus();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error"+ex);
@@ -301,23 +297,23 @@ public class TabUom extends javax.swing.JPanel {
        {
         uomController.delete(fieldName);
         uomController.UpdateTable(tableUom);
-        //uomController.clear(fieldId, fieldSearch, fieldName, fieldAbbreviation, areaDescription);
-        uomController.setId(fieldId, tableUom);
+        //uomController.clear( fieldSearch, fieldName, fieldAbbreviation, areaDescription);
+
         fieldName.requestFocus();
        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            uomController.Search(fieldSearch, fieldId, fieldName, fieldAbbreviation, areaDescription);
+            uomController.Search(fieldSearch, fieldName, fieldAbbreviation, areaDescription);
         }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
-            uomController.clear(fieldId, fieldSearch, fieldName, fieldAbbreviation, areaDescription);
-            uomController.setId(fieldId, tableUom);
+            uomController.clear( fieldSearch, fieldName, fieldAbbreviation, areaDescription);
+           
         }
     }//GEN-LAST:event_fieldSearchKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        uomController.Search(fieldSearch, fieldId, fieldName, fieldAbbreviation, areaDescription);
+        uomController.Search(fieldSearch, fieldName, fieldAbbreviation, areaDescription);
     }//GEN-LAST:event_btnSearchActionPerformed
 
 
@@ -329,7 +325,6 @@ public class TabUom extends javax.swing.JPanel {
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField fieldAbbreviation;
-    private javax.swing.JTextField fieldId;
     private javax.swing.JTextField fieldName;
     private javax.swing.JTextField fieldSearch;
     private javax.swing.JLabel jLabel1;

@@ -5,14 +5,26 @@
  */
 package view;
 
+import static com.sun.org.apache.xpath.internal.XPath.SELECT;
 import controller.CustomerController;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import static javax.swing.text.html.HTML.Tag.SELECT;
+import model.Koneksi;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 
@@ -31,7 +43,6 @@ public final class TabCustomer extends javax.swing.JPanel {
        
         initComponents();
         customerController.UpdateTable(tableCustomer);
-        customerController.setId(fieldId, tableCustomer);
         fieldNameCustomer.requestFocus();
     }
  
@@ -57,12 +68,12 @@ public final class TabCustomer extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         fieldNameCustomer = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        fieldId = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCustomer = new javax.swing.JTable();
 
@@ -115,14 +126,13 @@ public final class TabCustomer extends javax.swing.JPanel {
                     .addComponent(jLabel9)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jButton1))
                         .addComponent(fieldNameCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,9 +141,7 @@ public final class TabCustomer extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(fieldSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel7)
                 .addGap(5, 5, 5)
                 .addComponent(fieldNameCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,7 +157,7 @@ public final class TabCustomer extends javax.swing.JPanel {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(187, 187, 187));
@@ -182,19 +190,31 @@ public final class TabCustomer extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnRefresh))
-                .addGap(12, 12, 12))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRefresh))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +227,9 @@ public final class TabCustomer extends javax.swing.JPanel {
                 .addComponent(btnDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         tableCustomer.setBackground(new java.awt.Color(187, 187, 187));
@@ -275,10 +297,9 @@ public final class TabCustomer extends javax.swing.JPanel {
     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try{
-           customerController.save(fieldId,fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
-           customerController.clear(fieldId, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+           customerController.save(fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+           customerController.clear( fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
            customerController.UpdateTable(tableCustomer);
-           customerController.setId(fieldId, tableCustomer);
            fieldNameCustomer.requestFocus();
             
         }catch(Exception e){
@@ -294,7 +315,6 @@ public final class TabCustomer extends javax.swing.JPanel {
         customerController.delete(fieldNameCustomer);
         customerController.UpdateTable(tableCustomer);
         //customerController.clear(fieldId, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
-        customerController.setId(fieldId, tableCustomer);
         fieldNameCustomer.requestFocus();
        }
        
@@ -303,33 +323,8 @@ public final class TabCustomer extends javax.swing.JPanel {
 
     private void tableCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCustomerMouseClicked
         try{
-            customerController.setClick(fieldId, tableCustomer, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
-         
-            /*
-            int row =tableCustomer.getSelectedRow();
-            String tableClick=(tableCustomer.getModel().getValueAt(row,0).toString());
-            
-            String sqlQuery="select * from tb_customer where id='"+tableClick+"'";
-            ps=connection.prepareStatement(sqlQuery);
-            rset=ps.executeQuery();
-            
-            if(rset.next()){
-                String add0=rset.getString("id");
-                fieldId.setText(add0);
-                String add1=rset.getString("name");
-                fieldNameCustomer.setText(add1);
-                
-                String add2=rset.getString("email");
-                fieldEmailCustomer.setText(add2);
-                
-                String add3=rset.getString("phone");
-                fieldPhoneCustomer.setText(add3);
-                
-                String add4=rset.getString("address");
-                areaAddressCustomer.setText(add4);
-                
-            }*/
-            
+            customerController.setClick(tableCustomer, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+     
         }catch(Exception ex)
         {
             ex.printStackTrace();
@@ -337,18 +332,16 @@ public final class TabCustomer extends javax.swing.JPanel {
     }//GEN-LAST:event_tableCustomerMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        customerController.update(fieldId, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
-        customerController.clear(fieldId, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+        customerController.update( fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+        customerController.clear( fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
         customerController.UpdateTable(tableCustomer);
-        customerController.setId(fieldId, tableCustomer);
         fieldNameCustomer.requestFocus();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         
         customerController.UpdateTable(tableCustomer);
-        customerController.clear(fieldId, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
-        customerController.setId(fieldId, tableCustomer);
+        customerController.clear( fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
         fieldNameCustomer.requestFocus();
         
     }//GEN-LAST:event_btnRefreshActionPerformed
@@ -357,31 +350,58 @@ public final class TabCustomer extends javax.swing.JPanel {
         if(evt.getKeyCode()==KeyEvent.VK_DOWN || evt.getKeyCode()==KeyEvent.VK_UP )
         {
          try{
-            customerController.setClick(fieldId, tableCustomer, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
-        }catch(Exception ex)
-        {
+             
+            customerController.setClick(tableCustomer, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+        
+         }catch(Exception ex){
             ex.printStackTrace();
         }   
+         
         }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
-            customerController.clear(fieldId, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
-        }   customerController.setId(fieldId, tableCustomer);
+            customerController.clear( fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+        }  
     }//GEN-LAST:event_tableCustomerKeyPressed
 
     private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         {
             
-            customerController.Search(fieldId, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+            customerController.Search(fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
         }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
             
-            customerController.clear(fieldId, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
-        }   customerController.setId(fieldId, tableCustomer);
+            customerController.clear( fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+        }   
     }//GEN-LAST:event_fieldSearchKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   
-        customerController.Search(fieldId, fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
+           customerController.Search( fieldSearch, fieldNameCustomer, fieldEmailCustomer, fieldPhoneCustomer, areaAddressCustomer);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Connection conn;
+        Koneksi koneksi=new Koneksi();
+        conn=koneksi.getConnection();
+        try
+             
+            {
+               JasperDesign jd=JRXmlLoader.load("src/report/report2.jrxml");                          // Full address of you Report in between the “”
+               String sql="";
+
+               System.out.println("Query");
+               JRDesignQuery newQuery=new JRDesignQuery();
+               newQuery.setText(sql);
+               jd.setQuery(newQuery);
+               JasperReport jasperReport = JasperCompileManager.compileReport(jd);
+               JasperPrint jasperprint = JasperFillManager.fillReport(jasperReport, null,conn);
+               JasperViewer.viewReport(jasperprint,false);
+                   }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, ex.getMessage(),"Messege",JOptionPane.PLAIN_MESSAGE);
+                System.out.println(ex);
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -391,11 +411,11 @@ public final class TabCustomer extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField fieldEmailCustomer;
-    private javax.swing.JTextField fieldId;
     private javax.swing.JTextField fieldNameCustomer;
     private javax.swing.JTextField fieldPhoneCustomer;
     private javax.swing.JTextField fieldSearch;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;

@@ -30,6 +30,7 @@ public class Customers {
     private TableModel tableCustomer;
     //init untuk semua fungsi
 
+//##############################################################################
     public TableModel getTableCustomer() {
         return tableCustomer;
     }
@@ -96,12 +97,12 @@ public class Customers {
     }
    
     
-    
+//############################################################################## 
     //fungsi untuk menyimpan data
      public boolean update()
     {
         boolean errorMessage=false;
-        Connection connection;
+            Connection connection;
         if((connection = koneksi.getConnection()) !=null)
         {  
            
@@ -147,7 +148,8 @@ public class Customers {
         }
         return !errorMessage;
     }
-    
+     
+//##############################################################################
     public boolean save()
     {
         boolean errorMessage=false;
@@ -163,15 +165,15 @@ public class Customers {
            
             try {
                     save=true;
-                    sqlQuery="insert into tb_customer(id,name, email, phone, address) values(?,?,?,?,?)";
-                    
+              
+                    sqlQuery="insert into tb_customer(name,email,phone,address) values(?,?,?,?)";
                     
                     ps=connection.prepareStatement(sqlQuery);
-                    ps.setInt(1,id);
-                    ps.setString(2,name);
-                    ps.setString(3, email);
-                    ps.setString(4, phone);
-                    ps.setString(5, address);
+                    //ps.setInt(1,id);
+                    ps.setString(1,name);
+                    ps.setString(2, email);
+                    ps.setString(3, phone);
+                    ps.setString(4, address);
                     
                     totalSave=ps.executeUpdate();
                     
@@ -198,6 +200,7 @@ public class Customers {
         return !errorMessage;
     }
     
+//##############################################################################
     public boolean delete(String name)
     {
         boolean errorMessage=false;
@@ -237,6 +240,8 @@ public class Customers {
         
         return !errorMessage;
     }
+    
+//##############################################################################
      public boolean Search(String fieldSearch)
     {
         boolean errorMessage=false;
@@ -289,7 +294,7 @@ public class Customers {
         return !errorMessage;
     }
     
-    
+//##############################################################################
  
     public boolean UpdateTable() 
     {
@@ -310,6 +315,8 @@ public class Customers {
          return !errorMessage;
         
     }
+ //##############################################################################
+   
     
     
     

@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,11 +20,12 @@ import view.ErrorMessage;
 public class Penjualan {
 
     private int id,product_id,price,quantity,customer_id;
-    private String date_sell,name;
+    private Date date_sell;
+    private String name;
     private String message;
     private Koneksi koneksi=new Koneksi();
     private final ErrorMessage messageDialog=new ErrorMessage();
-    
+//##############################################################################
     public int getId() {
         return id;
     }
@@ -72,11 +74,11 @@ public class Penjualan {
         this.customer_id = customer_id;
     }
 
-    public String getDate_sell() {
+    public Date getDate_sell() {
         return date_sell;
     }
 
-    public void setDate_sell(String date_sell) {
+    public void setDate_sell(Date date_sell) {
         this.date_sell = date_sell;
     }
 
@@ -95,7 +97,7 @@ public class Penjualan {
     public void setKoneksi(Koneksi koneksi) {
         this.koneksi = koneksi;
     }
-     
+//##############################################################################
     //fungsi untuk menyimpan data
      public boolean update()
     {
@@ -120,7 +122,7 @@ public class Penjualan {
                         ps.setInt(3, product_id);
                         ps.setInt(4, price);
                         ps.setInt(5, quantity);
-                        ps.setString(6, date_sell);
+                        ps.setDate(6, date_sell);
                         ps.setInt(7, id);
                         totalSave=ps.executeUpdate();
                 if(save)
@@ -149,7 +151,7 @@ public class Penjualan {
         
         return !errorMessage;
     }
-    
+//##############################################################################
     public boolean save()
     {
         boolean errorMessage=false;
@@ -168,18 +170,18 @@ public class Penjualan {
             try {
               
                     save=true;
-                    sqlQuery="insert into tb_penjualan(id,customer_id,name,product_id,price,quantity,date_sell) values(?,?,?,?,?,?,?)";
+                    sqlQuery="insert into tb_penjualan(customer_id,name,product_id,price,quantity,date_sell) values(?,?,?,?,?,?)";
                     
                     
                     ps =connection.prepareStatement(sqlQuery);
                     
-                    ps.setInt(1, id);
-                    ps.setInt(2, customer_id);
-                    ps.setString(3, name);
-                    ps.setInt(4, product_id);
-                    ps.setInt(5, price);
-                    ps.setInt(6, quantity);
-                    ps.setString(7, date_sell);   
+                  
+                    ps.setInt(1, customer_id);
+                    ps.setString(2, name);
+                    ps.setInt(3, product_id);
+                    ps.setInt(4, price);
+                    ps.setInt(5, quantity);
+                    ps.setDate(6, date_sell);   
                     totalSave=ps.executeUpdate();
                 
                 if(save)
@@ -202,7 +204,8 @@ public class Penjualan {
         
         return !errorMessage;
     }
-     public boolean delete(int id)
+//##############################################################################
+     public boolean delete(int product_id)
     {
         boolean errorMessage=false;
         Connection connection;
@@ -213,11 +216,11 @@ public class Penjualan {
             String sqlQuery;
             PreparedStatement ps;
             
-            sqlQuery="delete from tb_penjualan where id=?";
+            sqlQuery="delete from tb_penjualan where product_id=?";
             
             try {
                 ps=connection.prepareStatement(sqlQuery);
-                ps.setInt(1, id);
+                ps.setInt(1, product_id);
                 totalDelete=ps.executeUpdate();
             
                 if(totalDelete<1)
@@ -241,6 +244,7 @@ public class Penjualan {
         
         return !errorMessage;
     }
+//##############################################################################
     public boolean Search(int id)
     {
         boolean errorMessage=false;
@@ -253,7 +257,7 @@ public class Penjualan {
         this.product_id=0;
         this.price=0;
         this.quantity=0;
-        this.date_sell="";        
+        this.date_sell=null;        
         if((connection = koneksi.getConnection()) !=null)
         {
             PreparedStatement ps;
@@ -275,7 +279,7 @@ public class Penjualan {
                     this.product_id=rset.getInt("product_id");
                     this.price=rset.getInt("price");
                     this.quantity=rset.getInt("quantity");
-                    this.date_sell=rset.getString("date_sell");
+                    this.date_sell=rset.getDate("date_sell");
                     
                 }
                 
@@ -295,6 +299,7 @@ public class Penjualan {
         
         return !errorMessage;
     }
+//##############################################################################
     public boolean UpdateTable(javax.swing.JTable tableTransaction){
        boolean errorMessage=false;
        Connection connection=null;
