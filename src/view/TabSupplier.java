@@ -25,7 +25,7 @@ public class TabSupplier extends javax.swing.JPanel {
     public TabSupplier() {
         initComponents();
         supplierController.UpdateTable(tableSupplier);
-        supplierController.setId(fieldId, tableSupplier);
+       
         fieldName.requestFocus();
         
         
@@ -54,7 +54,6 @@ public class TabSupplier extends javax.swing.JPanel {
         fieldEmail = new javax.swing.JTextField();
         fieldSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        fieldId = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableSupplier = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -125,9 +124,7 @@ public class TabSupplier extends javax.swing.JPanel {
                             .addComponent(fieldCompanyName, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fieldPhone, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel10)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -140,9 +137,7 @@ public class TabSupplier extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(4, 4, 4)
-                .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,10 +268,9 @@ public class TabSupplier extends javax.swing.JPanel {
     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try{ 
-        supplierController.save(fieldId, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
+        supplierController.save(fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
         supplierController.UpdateTable(tableSupplier);
-        supplierController.clear(fieldSearch, fieldEmail, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
-        supplierController.setId(fieldId, tableSupplier);
+        supplierController.clear(fieldSearch, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
         fieldName.requestFocus();
         }catch(Exception e){
             System.out.println("error controller");
@@ -285,10 +279,9 @@ public class TabSupplier extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
        try{
-           supplierController.update(fieldId, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
+           supplierController.update( fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
            supplierController.UpdateTable(tableSupplier);
-           supplierController.clear(fieldSearch, fieldEmail, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
-           supplierController.setId(fieldId, tableSupplier);
+           supplierController.clear(fieldSearch, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
            fieldName.requestFocus();
        }catch(Exception ex){
            ex.printStackTrace();
@@ -302,7 +295,7 @@ public class TabSupplier extends javax.swing.JPanel {
             supplierController.delete(fieldName);
             supplierController.UpdateTable(tableSupplier);
             //supplierController.clear(fieldSearch, fieldEmail, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
-            supplierController.setId(fieldId, tableSupplier);
+     
             fieldName.requestFocus();
             
         }
@@ -310,7 +303,7 @@ public class TabSupplier extends javax.swing.JPanel {
 
     private void tableSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSupplierMouseClicked
         try{
-            supplierController.setClick(tableSupplier, fieldSearch, fieldId, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
+            supplierController.setClick(tableSupplier, fieldSearch, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
         }catch(Exception ex){
            ex.printStackTrace();
         }
@@ -320,7 +313,7 @@ public class TabSupplier extends javax.swing.JPanel {
          if(evt.getKeyCode()==KeyEvent.VK_DOWN || evt.getKeyCode()==KeyEvent.VK_UP )
         {
          try{
-           supplierController.setClick(tableSupplier, fieldSearch, fieldId, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
+           supplierController.setClick(tableSupplier, fieldSearch, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
         }catch(Exception ex)
         {
             ex.printStackTrace();
@@ -329,22 +322,22 @@ public class TabSupplier extends javax.swing.JPanel {
     }//GEN-LAST:event_tableSupplierKeyPressed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        supplierController.clear(fieldSearch, fieldId, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
-        supplierController.setId(fieldId, tableSupplier);
+        supplierController.clear(fieldSearch, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
+
         supplierController.UpdateTable(tableSupplier);
         
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        supplierController.Search(fieldSearch, fieldId, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
+        supplierController.Search(fieldSearch, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-          supplierController.Search(fieldSearch, fieldId, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
+          supplierController.Search(fieldSearch, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
       }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
-          supplierController.clear(fieldSearch, fieldId, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
-          supplierController.setId(fieldId, tableSupplier);
+          supplierController.clear(fieldSearch, fieldName, fieldCompanyName, fieldEmail, fieldPhone, areaDescription);
+
       }
     }//GEN-LAST:event_fieldSearchKeyReleased
 
@@ -358,7 +351,6 @@ public class TabSupplier extends javax.swing.JPanel {
     private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField fieldCompanyName;
     private javax.swing.JTextField fieldEmail;
-    private javax.swing.JTextField fieldId;
     private javax.swing.JTextField fieldName;
     private javax.swing.JTextField fieldPhone;
     private javax.swing.JTextField fieldSearch;

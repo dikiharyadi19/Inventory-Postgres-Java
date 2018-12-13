@@ -23,9 +23,7 @@ public class TabPembelian extends javax.swing.JPanel {
     public TabPembelian() {
         initComponents();
         receivingController.UpdateTable(tableReceiving);
-        receivingController.setId(fieldId, tableReceiving);
-        receivingController.setCombo(comboSupplier);
-        receivingController.setCombo2(comboProduct);
+     
         fieldName.requestFocus();
     }
 
@@ -48,9 +46,7 @@ public class TabPembelian extends javax.swing.JPanel {
         btnFaktur = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        comboProduct = new javax.swing.JComboBox<>();
         fieldQuantity = new javax.swing.JTextField();
-        comboSupplier = new javax.swing.JComboBox<>();
         fieldPrice = new javax.swing.JTextField();
         fieldName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -61,7 +57,10 @@ public class TabPembelian extends javax.swing.JPanel {
         dateBuy = new com.toedter.calendar.JDateChooser();
         fieldSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        fieldId = new javax.swing.JTextField();
+        fieldProduct = new javax.swing.JTextField();
+        btnLihatProduct = new javax.swing.JButton();
+        fieldSupplier = new javax.swing.JTextField();
+        btnLihatSupplier = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(187, 187, 187));
 
@@ -154,11 +153,6 @@ public class TabPembelian extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Supplier*");
 
-        comboProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "==Select==" }));
-
-        comboSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "==Select==" }));
-        comboSupplier.setMinimumSize(new java.awt.Dimension(119, 27));
-
         fieldPrice.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 fieldPriceKeyReleased(evt);
@@ -195,6 +189,24 @@ public class TabPembelian extends javax.swing.JPanel {
             }
         });
 
+        fieldProduct.setEnabled(false);
+
+        btnLihatProduct.setText("Lihat");
+        btnLihatProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLihatProductActionPerformed(evt);
+            }
+        });
+
+        fieldSupplier.setEnabled(false);
+
+        btnLihatSupplier.setText("Lihat");
+        btnLihatSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLihatSupplierActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -202,26 +214,34 @@ public class TabPembelian extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldName)
-                    .addComponent(comboProduct, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fieldQuantity)
-                    .addComponent(fieldPrice)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldPrice)
+                            .addComponent(fieldQuantity)
+                            .addComponent(dateBuy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(fieldSupplier)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLihatSupplier))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(fieldSearch)
                         .addGap(18, 18, 18)
                         .addComponent(btnSearch))
-                    .addComponent(dateBuy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comboSupplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fieldName)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(fieldProduct)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLihatProduct))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
-                            .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 220, Short.MAX_VALUE)))
+                            .addComponent(jLabel1))
+                        .addGap(0, 257, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -233,33 +253,37 @@ public class TabPembelian extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLihatProduct)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(fieldProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateBuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jLabel9)
+                .addComponent(dateBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLihatSupplier))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -271,8 +295,8 @@ public class TabPembelian extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,11 +304,9 @@ public class TabPembelian extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -294,11 +316,11 @@ public class TabPembelian extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try{
             
-            receivingController.save(fieldId, fieldName, comboProduct, fieldQuantity, fieldPrice, fieldPrice, dateBuy, comboSupplier);
+            receivingController.save(fieldName, fieldProduct, fieldQuantity, fieldPrice, fieldPrice, dateBuy, fieldSupplier);
             receivingController.UpdateTable(tableReceiving);
-            receivingController.Clear(fieldId, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice,  dateBuy, comboSupplier);
-            receivingController.setId(fieldId, tableReceiving);
+            receivingController.Clear(fieldSearch, fieldName, fieldProduct, fieldQuantity, fieldPrice,  dateBuy, fieldSupplier);
             fieldName.requestFocus();
+            
         }catch(Exception ex){
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error Saving Data");
@@ -308,19 +330,17 @@ public class TabPembelian extends javax.swing.JPanel {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         receivingController.UpdateTable(tableReceiving);
-        receivingController.Clear(fieldId, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice, dateBuy, comboSupplier);
-        receivingController.setId(fieldId, tableReceiving);
-        receivingController.setCombo2(comboProduct);
-        receivingController.setCombo(comboSupplier);
+        receivingController.Clear(fieldSearch, fieldName, fieldProduct, fieldQuantity, fieldPrice, dateBuy, fieldSupplier);
+        
         fieldName.requestFocus();
+        
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try{
-            receivingController.update(fieldId, fieldName, comboProduct, fieldQuantity, fieldPrice, fieldPrice, dateBuy, comboSupplier);
-            receivingController.Clear(fieldId, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice, dateBuy, comboSupplier);
+            receivingController.update( fieldName, fieldProduct, fieldQuantity, fieldPrice, fieldPrice, dateBuy, fieldSupplier);
+            receivingController.Clear(fieldSearch, fieldName, fieldProduct, fieldQuantity, fieldPrice, dateBuy, fieldSupplier);
             receivingController.UpdateTable(tableReceiving);
-            receivingController.setId(fieldId, tableReceiving);
             fieldName.requestFocus();
             
         }catch(Exception ex){
@@ -334,17 +354,17 @@ public class TabPembelian extends javax.swing.JPanel {
         int p=JOptionPane.showConfirmDialog(null, "Do you really,want to delete data ?","delete",JOptionPane.YES_NO_OPTION);
        if(p==0)
        {
+           
         receivingController.delete(fieldName);
         receivingController.UpdateTable(tableReceiving);
-       // receivingController.Clear(fieldId, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice, dateDate, comboSupplier);
-        receivingController.setId(fieldId, tableReceiving);
         fieldName.requestFocus();
+        
        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tableReceivingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableReceivingMouseClicked
         try{
-           receivingController.setClick(fieldId, tableReceiving, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice,dateBuy, comboSupplier);
+           receivingController.setClick( tableReceiving, fieldSearch, fieldName, fieldProduct, fieldQuantity, fieldPrice,dateBuy, fieldSupplier);
         
             
         }catch(Exception ex)
@@ -356,7 +376,7 @@ public class TabPembelian extends javax.swing.JPanel {
     private void tableReceivingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableReceivingKeyPressed
          if(evt.getKeyCode()==KeyEvent.VK_DOWN || evt.getKeyCode()==KeyEvent.VK_UP )
         {
-            receivingController.setClick(fieldId, tableReceiving, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice,  dateBuy, comboSupplier);
+            receivingController.setClick( tableReceiving, fieldSearch, fieldName, fieldProduct, fieldQuantity, fieldPrice,  dateBuy, fieldSupplier);
         }
     }//GEN-LAST:event_tableReceivingKeyPressed
 
@@ -372,32 +392,43 @@ public class TabPembelian extends javax.swing.JPanel {
 
     private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            receivingController.Search(fieldId, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice,  dateBuy, comboSupplier);
+            receivingController.Search(fieldSearch, fieldName, fieldProduct, fieldQuantity, fieldPrice,  dateBuy,fieldSupplier);
         }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
-            receivingController.Clear(fieldId, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice,dateBuy, comboSupplier);
+            receivingController.Clear(fieldSearch, fieldName, fieldProduct, fieldQuantity, fieldPrice,dateBuy, fieldSupplier);
         }
     }//GEN-LAST:event_fieldSearchKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        receivingController.Search(fieldId, fieldSearch, fieldName, comboProduct, fieldQuantity, fieldPrice,dateBuy, comboSupplier);
+        receivingController.Search( fieldSearch, fieldName, fieldProduct, fieldQuantity, fieldPrice,dateBuy, fieldSupplier);
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnLihatProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLihatProductActionPerformed
+        // TODO add your handling code here:
+        receivingController.showProduct(fieldProduct,fieldPrice,fieldQuantity);
+    }//GEN-LAST:event_btnLihatProductActionPerformed
+
+    private void btnLihatSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLihatSupplierActionPerformed
+        // TODO add your handling code here:
+        receivingController.showSupplier(fieldSupplier);
+    }//GEN-LAST:event_btnLihatSupplierActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnFaktur;
+    private javax.swing.JButton btnLihatProduct;
+    private javax.swing.JButton btnLihatSupplier;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> comboProduct;
-    private javax.swing.JComboBox<String> comboSupplier;
     private com.toedter.calendar.JDateChooser dateBuy;
-    private javax.swing.JTextField fieldId;
     private javax.swing.JTextField fieldName;
     private javax.swing.JTextField fieldPrice;
+    private javax.swing.JTextField fieldProduct;
     private javax.swing.JTextField fieldQuantity;
     private javax.swing.JTextField fieldSearch;
+    private javax.swing.JTextField fieldSupplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel5;

@@ -23,7 +23,7 @@ public class Uoms {
     private Object[][] list;
     private final Koneksi koneksi=new Koneksi();
     private final ErrorMessage messageDialog=new ErrorMessage();
-
+ //##############################################################################
     public int getId() {
         return id;
     }
@@ -72,7 +72,7 @@ public class Uoms {
     {
         this.list=list;
     }
-         
+//##############################################################################
    //fungsi untuk menyimpan data
      public boolean update()
     {
@@ -130,7 +130,7 @@ public class Uoms {
         
         return !errorMessage;
     }
-    
+//##############################################################################
     public boolean save()
     {
         boolean errorMessage=false;
@@ -148,12 +148,12 @@ public class Uoms {
            
             try {
                     save=true;
-                    sqlQuery="insert into tb_unit_of_measure (id,name,abbreviation,description) values(?,?,?,?)";
+                    sqlQuery="insert into tb_unit_of_measure (name,abbreviation,description) values(?,?,?)";
                     ps=connection.prepareStatement(sqlQuery);
-                    ps.setInt(1, id);
-                    ps.setString(2, name);
-                    ps.setString(3, abbreviation);
-                    ps.setString(4, description);
+                
+                    ps.setString(1, name);
+                    ps.setString(2, abbreviation);
+                    ps.setString(3, description);
                     totalSave=ps.executeUpdate();
                 
                 
@@ -178,6 +178,7 @@ public class Uoms {
         
         return !errorMessage;
     }
+//##############################################################################
      public boolean delete(String name)
     {
         boolean errorMessage=false;
@@ -217,6 +218,7 @@ public class Uoms {
         
         return !errorMessage;
     }
+//##############################################################################
     public boolean Search(String name)
     {
         boolean errorMessage=false;
@@ -272,7 +274,7 @@ public class Uoms {
         
         return !errorMessage;
     }
-    
+//##############################################################################
     public boolean UpdateTable(javax.swing.JTable tableUom) 
     {
         boolean errorMessage=false;
@@ -292,5 +294,5 @@ public class Uoms {
          return !errorMessage;
         
     }
-   
+//##############################################################################
 }

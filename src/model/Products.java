@@ -26,7 +26,7 @@ public class Products {
     private String message;
     private final Koneksi koneksi=new Koneksi();
     private final ErrorMessage messageDialog=new ErrorMessage();
-
+//##############################################################################
     public int getId() {
         return id;
     }
@@ -107,7 +107,7 @@ public class Products {
         this.list = list;
     }
     
-     
+//##############################################################################
      public boolean update()
     {
         boolean errorMessage=false;
@@ -164,7 +164,7 @@ public class Products {
         
         return !errorMessage;
     }
-    
+//##############################################################################
     public boolean save()
     {
         boolean errorMessage=false;
@@ -181,19 +181,19 @@ public class Products {
             ResultSet rset;
            
                     save=true;
-                    sqlQuery="insert into tb_product (id,barcode,name,description,unit_of_measure_id,stock,purchase_price,sale_price) values(?,?,?,?,?,?,?,?)";
+                    sqlQuery="insert into tb_product(barcode,name,description,unit_of_measure_id,stock,purchase_price,sale_price) values(?,?,?,?,?,?,?)";
                     
                     
                     ps=connection.prepareStatement(sqlQuery);
                     
-                    ps.setInt(1, id);
-                    ps.setInt(2, barcode);
-                    ps.setString(3, name);
-                    ps.setString(4, description);
-                    ps.setInt(5, unit_of_measure_id);
-                    ps.setInt(6, stock);
-                    ps.setInt(7, purchase_price);
-                    ps.setInt(8, sale_price);
+                
+                    ps.setInt(1, barcode);
+                    ps.setString(2, name);
+                    ps.setString(3, description);
+                    ps.setInt(4, unit_of_measure_id);
+                    ps.setInt(5, stock);
+                    ps.setInt(6, purchase_price);
+                    ps.setInt(7, sale_price);
                     totalSave=ps.executeUpdate();
                 if(save)
                 {
@@ -213,7 +213,7 @@ public class Products {
         return !errorMessage;
     }  
  
-    
+//##############################################################################
     public boolean delete(int Barcode)
     {
         boolean errorMessage=false;
@@ -251,7 +251,7 @@ public class Products {
         
         return !errorMessage;
     }
-    
+//##############################################################################
     public boolean Search(int barcode)
     {
         boolean errorMessage=false;
@@ -309,6 +309,7 @@ public class Products {
         
         return !errorMessage;
     }
+//##############################################################################
     public boolean UpdateTable(javax.swing.JTable tableProduct){
        boolean errorMessage=false;
        Connection connection=null;
@@ -325,5 +326,44 @@ public class Products {
         
        return !errorMessage;
     }
+//##############################################################################
+public boolean readData(){
+    boolean errorMessage=false;
+    Connection connection;
+    list=new Object[0][0];
     
+    if((connection = koneksi.getConnection()) !=null){
+        String sqlQuery="select id,name from tb_unit_of_measure";
+        PreparedStatement ps;
+        ResultSet rset;
+        
+        try{
+            ps=connection.prepareStatement(sqlQuery);
+            rset=ps.executeQuery();
+            
+           rset.next();
+                //rset.last();
+            list= new Object[rset.getRow()][2];
+            
+            if(rset.getRow()>0){
+            //    rset.first();
+                int i=0;
+                do{
+                    list[i]=new Object[]{rset.getString("id"),rset.getString("name")};
+                    i++;
+                }while(rset .next());
+            }
+            ps.close();
+            rset.close();
+            connection.close();
+            
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    return true;
+}
+//##############################################################################
 }

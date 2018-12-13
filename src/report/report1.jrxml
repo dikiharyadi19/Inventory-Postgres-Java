@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ec08b7c5-cc95-46db-88f6-e381c5dd3d86">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="date_sell" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     tb_penjualan."id" AS tb_penjualan_id,
+     tb_penjualan."customer_id" AS tb_penjualan_customer_id,
+     tb_penjualan."name" AS tb_penjualan_name,
+     tb_penjualan."product_id" AS tb_penjualan_product_id,
+     tb_penjualan."price" AS tb_penjualan_price,
+     tb_penjualan."quantity" AS tb_penjualan_quantity,
+     tb_penjualan."date_sell" AS tb_penjualan_date_sell,
+     tb_customer."id" AS tb_customer_id,
+     tb_customer."name" AS tb_customer_name,
+     tb_customer."email" AS tb_customer_email,
+     tb_customer."phone" AS tb_customer_phone,
+     tb_customer."address" AS tb_customer_address,
+     tb_product."id" AS tb_product_id,
+     tb_product."barcode" AS tb_product_barcode,
+     tb_product."name" AS tb_product_name,
+     tb_product."description" AS tb_product_description,
+     tb_product."stock" AS tb_product_stock,
+     tb_product."purchase_price" AS tb_product_purchase_price,
+     tb_product."sale_price" AS tb_product_sale_price,
+     tb_product."unit_of_measure_id" AS tb_product_unit_of_measure_id
+FROM
+     "public"."tb_customer" tb_customer INNER JOIN "public"."tb_penjualan" tb_penjualan ON tb_customer."id" = tb_penjualan."customer_id"
+     INNER JOIN "public"."tb_product" tb_product ON tb_penjualan."product_id" = tb_product."id"]]>
+	</queryString>
+	<field name="tb_penjualan_id" class="java.lang.Integer"/>
+	<field name="tb_penjualan_customer_id" class="java.lang.Integer"/>
+	<field name="tb_penjualan_name" class="java.lang.String"/>
+	<field name="tb_penjualan_product_id" class="java.lang.Integer"/>
+	<field name="tb_penjualan_price" class="java.lang.Integer"/>
+	<field name="tb_penjualan_quantity" class="java.lang.Integer"/>
+	<field name="tb_penjualan_date_sell" class="java.sql.Date"/>
+	<field name="tb_customer_id" class="java.lang.Integer"/>
+	<field name="tb_customer_name" class="java.lang.String"/>
+	<field name="tb_customer_email" class="java.lang.String"/>
+	<field name="tb_customer_phone" class="java.lang.String"/>
+	<field name="tb_customer_address" class="java.lang.String"/>
+	<field name="tb_product_id" class="java.lang.Integer"/>
+	<field name="tb_product_barcode" class="java.lang.Integer"/>
+	<field name="tb_product_name" class="java.lang.String"/>
+	<field name="tb_product_description" class="java.lang.String"/>
+	<field name="tb_product_stock" class="java.lang.Integer"/>
+	<field name="tb_product_purchase_price" class="java.lang.Integer"/>
+	<field name="tb_product_sale_price" class="java.lang.Integer"/>
+	<field name="tb_product_unit_of_measure_id" class="java.lang.Integer"/>
+	<group name="tb_penjualan_id">
+		<groupExpression><![CDATA[$F{tb_penjualan_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d8c81806-5ec7-4095-93e8-a63779ed9c07" x="89" y="20" width="407" height="40"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Penjualan Per-Hari]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c9af1644-cc4e-43dd-a807-f38c4ad397db" x="0" y="37" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d229b1ed-598d-4ca1-b091-ce461c00219d" x="233" y="84" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aa0f08f1-2506-4cd4-9c32-f4dfd6024b8e" x="100" y="37" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="252161c8-fdbe-44d9-9e90-fa92f72bd19f" x="200" y="37" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0989a1f4-77ba-4ef8-97c6-b4d36311dddd" x="300" y="37" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="64d6e979-1f9f-4b02-89b6-632319979e81" x="396" y="37" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f233a411-5dc4-49ed-a269-3d28e77d4277" x="496" y="37" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="24afa193-2fe6-483b-af99-e191859dc29b" x="422" y="84" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

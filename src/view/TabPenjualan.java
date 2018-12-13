@@ -21,10 +21,8 @@ public class TabPenjualan extends javax.swing.JPanel {
     public TabPenjualan() {
         initComponents();
         transactionController.UpdateTable(tableTransaction);
-        transactionController.setId(fieldId, tableTransaction);
-        transactionController.setCombo(comboCustomer);
-        transactionController.setCombo2(comboProduct);
-        comboCustomer.setVisible(false);
+     
+       
     }
 
     /**
@@ -37,7 +35,6 @@ public class TabPenjualan extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        comboProduct = new javax.swing.JComboBox<>();
         fieldPrice = new javax.swing.JTextField();
         fieldQuantity = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -48,10 +45,10 @@ public class TabPenjualan extends javax.swing.JPanel {
         dateDate = new com.toedter.calendar.JDateChooser();
         fieldSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        comboCustomer = new javax.swing.JComboBox<>();
-        fieldName = new javax.swing.JTextField();
-        boxMember = new javax.swing.JCheckBox();
-        fieldId = new javax.swing.JTextField();
+        fieldCustomer = new javax.swing.JTextField();
+        btnLihatCustomer = new javax.swing.JButton();
+        fieldProduct = new javax.swing.JTextField();
+        btnLihatProduct = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -64,13 +61,6 @@ public class TabPenjualan extends javax.swing.JPanel {
         setBackground(new java.awt.Color(187, 187, 187));
 
         jPanel2.setBackground(new java.awt.Color(187, 187, 187));
-
-        comboProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "==Select==" }));
-        comboProduct.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboProductActionPerformed(evt);
-            }
-        });
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nama Pelanggan");
@@ -102,17 +92,21 @@ public class TabPenjualan extends javax.swing.JPanel {
             }
         });
 
-        comboCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "==Select==" }));
-        comboCustomer.addActionListener(new java.awt.event.ActionListener() {
+        fieldCustomer.setEnabled(false);
+
+        btnLihatCustomer.setText("Lihat");
+        btnLihatCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboCustomerActionPerformed(evt);
+                btnLihatCustomerActionPerformed(evt);
             }
         });
 
-        boxMember.setText("Cari Member");
-        boxMember.addActionListener(new java.awt.event.ActionListener() {
+        fieldProduct.setEnabled(false);
+
+        btnLihatProduct.setText("Lihat");
+        btnLihatProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxMemberActionPerformed(evt);
+                btnLihatProductActionPerformed(evt);
             }
         });
 
@@ -127,24 +121,31 @@ public class TabPenjualan extends javax.swing.JPanel {
                         .addComponent(fieldSearch)
                         .addGap(7, 7, 7)
                         .addComponent(btnSearch))
-                    .addComponent(fieldName)
-                    .addComponent(comboCustomer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comboProduct, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fieldPrice)
                     .addComponent(fieldQuantity)
                     .addComponent(dateDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(27, 27, 27)
-                                .addComponent(boxMember))
                             .addComponent(jLabel6)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel16)
-                            .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
-                        .addGap(0, 103, Short.MAX_VALUE)))
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(fieldCustomer)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLihatCustomer))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(0, 157, Short.MAX_VALUE))
+                                    .addComponent(fieldProduct))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLihatProduct)))
+                        .addGap(6, 6, 6)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -154,21 +155,19 @@ public class TabPenjualan extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
-                .addGap(1, 1, 1)
-                .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(73, 73, 73)
+                .addComponent(jLabel1)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxMember)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLihatCustomer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLihatProduct))
+                .addGap(7, 7, 7)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +226,7 @@ public class TabPenjualan extends javax.swing.JPanel {
                     .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,8 +276,8 @@ public class TabPenjualan extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,36 +293,28 @@ public class TabPenjualan extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProductActionPerformed
-        if(comboProduct.isLightWeightPopupEnabled()){
-            String name=comboProduct.getSelectedItem().toString();
-            transactionController.setPrice(name, fieldPrice);
-            fieldQuantity.requestFocus();
-        }
-    }//GEN-LAST:event_comboProductActionPerformed
-
     private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            transactionController.Search(fieldName, boxMember, fieldSearch, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
+            transactionController.Search( fieldSearch,  fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
         }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
 
-            transactionController.Clear(fieldName, fieldSearch, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
-            transactionController.setId(fieldId, tableTransaction);
+            transactionController.Clear(fieldSearch, fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
         }
     }//GEN-LAST:event_fieldSearchKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        transactionController.Search(fieldName, boxMember, fieldSearch, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
+        transactionController.Search(fieldSearch, fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
+                
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try{
 
-            transactionController.save(boxMember, fieldName, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
+            transactionController.save(fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
             transactionController.UpdateTable(tableTransaction);
-            transactionController.Clear(fieldName, fieldSearch, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
-            transactionController.setId(fieldId, tableTransaction);
-            comboCustomer.requestFocus();
+
+            transactionController.Clear(fieldSearch, fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
+            
         }catch(Exception ex){
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error Saving Data");
@@ -332,14 +323,11 @@ public class TabPenjualan extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try{
-            transactionController.update(fieldName, boxMember, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
-            transactionController.Clear(fieldName, fieldSearch, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
+            transactionController.update(fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
+            transactionController.Clear(fieldSearch, fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
             transactionController.UpdateTable(tableTransaction);
 
-            transactionController.setId(fieldId, tableTransaction);
-
-            comboCustomer.requestFocus();
-
+            
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error"+ex);
         }
@@ -349,25 +337,19 @@ public class TabPenjualan extends javax.swing.JPanel {
         int p=JOptionPane.showConfirmDialog(null, "Do you really,want to delete data ?","delete",JOptionPane.YES_NO_OPTION);
         if(p==0)
         {
-            transactionController.delete(fieldId, comboProduct);
-            transactionController.UpdateTable(tableTransaction);
-            //transactionController.Clear(fieldName, fieldSearch, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
-            transactionController.setId(fieldId, tableTransaction);
-            comboCustomer.requestFocus();
+            transactionController.delete(fieldProduct);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         transactionController.UpdateTable(tableTransaction);
 
-        transactionController.Clear(fieldName, fieldSearch, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
-        transactionController.setId(fieldId, tableTransaction);
-        comboCustomer.requestFocus();
+        transactionController.Clear(fieldSearch, fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void tableTransactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTransactionMouseClicked
         try{
-            transactionController.setClick(fieldName, boxMember, tableTransaction, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
+            transactionController.setClick(fieldPrice, tableTransaction, fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
         }catch(Exception ex)
         {
             ex.printStackTrace();
@@ -377,40 +359,33 @@ public class TabPenjualan extends javax.swing.JPanel {
     private void tableTransactionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableTransactionKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_DOWN || evt.getKeyCode()==KeyEvent.VK_UP )
         {
-            transactionController.setClick(fieldName, boxMember, tableTransaction, fieldId, comboCustomer, comboProduct, fieldPrice, fieldQuantity, dateDate);
+            transactionController.setClick(fieldPrice, tableTransaction, fieldCustomer, fieldProduct, fieldPrice, fieldQuantity, dateDate);
         }
     }//GEN-LAST:event_tableTransactionKeyPressed
 
-    private void comboCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCustomerActionPerformed
-        transactionController.setComboProduct(fieldName, comboProduct);
-        
-    }//GEN-LAST:event_comboCustomerActionPerformed
+    private void btnLihatCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLihatCustomerActionPerformed
+       transactionController.showCustomer(fieldCustomer);
+    }//GEN-LAST:event_btnLihatCustomerActionPerformed
 
-    private void boxMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxMemberActionPerformed
-       if(boxMember.isSelected()){
-           comboCustomer.setVisible(true);
-           fieldName.setVisible(false);
-       }else{
-           comboCustomer.setVisible(false);
-           fieldName.setVisible(true);
-       }
-    }//GEN-LAST:event_boxMemberActionPerformed
+    private void btnLihatProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLihatProductActionPerformed
+        transactionController.showProduct(fieldProduct,fieldPrice);
+    }//GEN-LAST:event_btnLihatProductActionPerformed
+    
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox boxMember;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInvoice;
+    private javax.swing.JButton btnLihatCustomer;
+    private javax.swing.JButton btnLihatProduct;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> comboCustomer;
-    private javax.swing.JComboBox<String> comboProduct;
     private com.toedter.calendar.JDateChooser dateDate;
-    private javax.swing.JTextField fieldId;
-    private javax.swing.JTextField fieldName;
+    private javax.swing.JTextField fieldCustomer;
     private javax.swing.JTextField fieldPrice;
+    private javax.swing.JTextField fieldProduct;
     private javax.swing.JTextField fieldQuantity;
     private javax.swing.JTextField fieldSearch;
     private javax.swing.JLabel jLabel1;

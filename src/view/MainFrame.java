@@ -24,7 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         MasterMenu.setEnabled(true);
         menuController.setVisible(customer, product, supplier, uom, user, receiving, cashier);
         
@@ -95,10 +95,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(550, 20));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabbedPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 1120, 610));
+        getContentPane().add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 1180, 620));
 
         customerIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -269,7 +270,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(cashierB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 170, 20));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/menu.png"))); // NOI18N
-        getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 660));
+        getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1340, 690));
 
         FileMenu.setText("File");
 
@@ -296,7 +297,7 @@ public class MainFrame extends javax.swing.JFrame {
         MasterMenu.setText("Master Data");
 
         CustomerMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
-        CustomerMenuItem.setText("Pelanggan");
+        CustomerMenuItem.setText("Customer");
         CustomerMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CustomerMenuItemActionPerformed(evt);
@@ -306,7 +307,7 @@ public class MainFrame extends javax.swing.JFrame {
         MasterMenu.add(jSeparator1);
 
         ProductMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
-        ProductMenuItem.setText("Barang");
+        ProductMenuItem.setText("Product");
         ProductMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProductMenuItemActionPerformed(evt);

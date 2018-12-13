@@ -23,7 +23,7 @@ public class Suppliers {
     private Object[][] list;
     private final Koneksi koneksi=new Koneksi();
     private final ErrorMessage messageDialog=new ErrorMessage();
-
+//##############################################################################
     public int getId() {
         return id;
     }
@@ -90,7 +90,7 @@ public class Suppliers {
     
     
      
-      
+//##############################################################################
     //fungsi untuk menyimpan data
      public boolean update()
     {
@@ -144,7 +144,7 @@ public class Suppliers {
         
         return !errorMessage;
     }
-    
+//##############################################################################
     public boolean save()
     {
         boolean errorMessage=false;
@@ -198,6 +198,7 @@ public class Suppliers {
         
         return !errorMessage;
     }
+//##############################################################################
     public boolean delete(String name)
     {
         boolean errorMessage=false;
@@ -237,6 +238,7 @@ public class Suppliers {
         
         return !errorMessage;
     }
+//##############################################################################
     public boolean Search(String fieldSearch)
     {
         boolean errorMessage=false;
@@ -294,7 +296,7 @@ public class Suppliers {
         
         return !errorMessage;
     }
-    
+//##############################################################################
     public boolean UpdateTable(javax.swing.JTable tableSupplier) 
     {
         boolean errorMessage=false;
@@ -315,6 +317,6 @@ public class Suppliers {
         
     }
     
-    
+//##############################################################################
     
 }
